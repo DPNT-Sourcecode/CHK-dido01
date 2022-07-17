@@ -97,11 +97,13 @@ def get_group_offers(items_mapping):
         return 0, items_mapping
 
 
-    total_sum_calclulated_of_remaining_items = 0
-    for 
+    
         
         
     total_price = available_offers * 45
+    counter = 0
+    for sku in GROUP_OFFER
+         
     total_price += remaining_items * cheapest # cheapest item of the group offer list
     return total_price, items_mapping
 
