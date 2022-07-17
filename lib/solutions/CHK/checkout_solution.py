@@ -1,4 +1,4 @@
-from data import PRICE_TABLE, PRIORITY
+from .data import PRICE_TABLE, PRIORITY
 
 # noinspection PyUnusedLocal
 # skus = unicode string
@@ -94,7 +94,7 @@ def get_total_price_from_offers(total_quantity, offers, normal_price):
 
 def checkout(skus):
     is_sku_valid = check_validity_of_skus(skus)
-    if not is_sku_valid:
+    if not is_sku_valid or is_sku_valid == -1:
         return is_sku_valid
 
     total_price = 0
@@ -124,4 +124,4 @@ def checkout(skus):
     return total_price
 
 
-print(checkout('a'))
+# print(checkout('a'))
