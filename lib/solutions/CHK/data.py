@@ -91,7 +91,7 @@ PRICE_TABLE = {
     },
     "P" : {
         "price": 50,
-        "offer": "5 for 100"
+        "offer": "5 for 200"
     },
     "Q" : {
         "price": 30,
