@@ -40,8 +40,10 @@ def calculate_offers(sku_data):
         num_of_items, offer_price = available_offer.split('for')
         num_of_items = int(num_of_items)
         offer_price = int(offer_price)
-    offers[num_of_items] = offer_price
-    print(offers)
+        offers[num_of_items] = offer_price
+
+    print(offers.sort)
+    print(list(offers.keys)
     return offers
 
 
@@ -77,5 +79,6 @@ def checkout(skus):
     return total_price
 
 checkout("AAA")
+
 
 
