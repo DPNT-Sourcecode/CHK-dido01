@@ -55,9 +55,13 @@ def calculate_offers(sku_data):
 
     return offers
 
-def get_total_price_from_offers(offers, price):
-for offer in sorted(offers.items(), reverse=True):
-                    print(offer)
+def get_total_price_from_offers(total_quantity, offers, normal_price):
+    total_price_of_sku = 0
+    remaining_quantity = total_quantity
+    for num_of_items, offer_price in sorted(offers.items(), reverse=True):
+        available_offers = remaining_quantity // num_of_items # find how many times the offer applies
+        remaining_non_offer_skus = total_quantity % num_of_items # find how many items are left that have a normal price
+        total_price_of_sku = available_offers * offer_price + remaining_non_offer_skus * sku_data['price']
 
 def checkout(skus):
     is_sku_valid = check_validity_of_skus(skus)
