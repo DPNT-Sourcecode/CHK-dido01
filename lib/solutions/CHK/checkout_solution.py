@@ -1,4 +1,4 @@
-from data import PRICE_TABLE, PRIORITY
+from .data import PRICE_TABLE, PRIORITY
 
 # noinspection PyUnusedLocal
 # skus = unicode string
@@ -57,8 +57,8 @@ def calculate_offers(sku_data):
     return offers
 
 def calculate_deductions(items_mapping, sku):
+    """Calculate deductions and remove items from quantity mapping"""
     sku_data = PRICE_TABLE[sku]
-    print(items_mapping)
 
     if sku_data['offer']:
         offers = calculate_offers(sku_data['offer'])
@@ -66,22 +66,18 @@ def calculate_deductions(items_mapping, sku):
         if offers['deduction']:
             sku_deductions = items_mapping[sku] // int(offers['deduction']['num_of_items'])
             total_sku_deductions = offers['deduction']['quantity'] * sku_deductions
-            
-            print(items_mapping[offers['deduction']['chosen_sku']])
+
             try:
-                if total_sku_deductions > items_mapping[offers['deduction']['chosen_sku']]:
+                if total_sku_deductions < items_mapping[offers['deduction']['chosen_sku']]:
                     items_mapping[offers['deduction']['chosen_sku']] = items_mapping[offers['deduction']['chosen_sku']] - total_sku_deductions
                 else:
                     items_mapping[offers['deduction']['chosen_sku']] = 0
             except KeyError:
                 pass
-            print(items_mapping)
 
         total = items_mapping[sku] * PRICE_TABLE[sku]['price']
         del items_mapping[sku]
         return total, items_mapping
-
-
 
 def get_total_price_from_offers(total_quantity, offers, normal_price):
     """Calculate total price from available"""
@@ -125,7 +121,5 @@ def checkout(skus):
 
         total_price += total_price_of_sku
 
-    print(total_price)
     return total_price
 
-checkout("EEEEBBBBB")
