@@ -26,6 +26,6 @@ PRICE_TABLE = {
     },
     "E" : {
         "price": 40,
-        "offer": "2 for 1B"
+        "offer": "2 for 1.B"
     },
 }

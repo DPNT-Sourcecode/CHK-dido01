@@ -3,8 +3,7 @@ from .data import PRICE_TABLE
 # noinspection PyUnusedLocal
 # skus = unicode string
 
-def checkout(skus):
-    # Question where is the sku -> price -> offer mapping data come from are we supposed to create a dummy dictionary?
+def check_validity_of_skus(skus):
     if not skus:
         # empty skus are allowed
         return 0
@@ -16,7 +15,11 @@ def checkout(skus):
     if not skus.isalpha():
         # check if it contains any special chars or numbers
         return -1
+    
+    return True
 
+def create_item_quantity_mapping(skus):
+    """Returns a dictionary mapping the skus with the corresponding quantity"""
     items_mapping = {}
     for char in skus:
         try:
@@ -24,7 +27,13 @@ def checkout(skus):
         except KeyError:
             # if item not already in the mapping dictionary initialize it to 1
             items_mapping[char] = 1
+    return items_mapping
 
+def checkout(skus):
+    
+    
+
+    items_mapping = create_item_quantity_mapping(skus)
     total_price = 0
     for sku, quantity in items_mapping.items():
         try:
