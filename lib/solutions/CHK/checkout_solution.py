@@ -5,7 +5,8 @@
 def checkout(skus):
     # Question where is the sku -> price -> offer mapping data come from are we supposed to create a dummy dictionary?
     if not skus:
-        return -1
+        # empty skus are allowed
+        return 0
 
     if not skus.isupper():
         # check if contains only uppercase letters
