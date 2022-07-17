@@ -102,7 +102,13 @@ def get_group_offers(items_mapping):
         
     total_price = available_offers * 45
     counter = 0
-    for sku in GROUP_OFFER
+    for sku in GROUP_OFFER.reverse():
+        total_sku_items = items_mapping[sku]
+        if total_sku_items < remaining_items and counter < remaining_items:
+            counter+=total_sku_items
+            remaining_price = total_sku_items * PRICE_TABLE[sku]['price']
+        else:
+            remaining_price = remaining_items * PRICE_TABLE[sku]['price']
          
     total_price += remaining_items * cheapest # cheapest item of the group offer list
     return total_price, items_mapping
@@ -162,3 +168,4 @@ def checkout(skus):
     return total_price
 
 print(checkout('CXYZYZC'))
+
