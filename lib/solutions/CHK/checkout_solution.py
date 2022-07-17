@@ -1,4 +1,4 @@
-from .data import PRICE_TABLE, PRIORITY, GROUP_OFFER
+from data import PRICE_TABLE, PRIORITY, GROUP_OFFER
 
 # noinspection PyUnusedLocal
 # skus = unicode string
@@ -88,9 +88,11 @@ def get_group_offers(items_mapping):
             del items_mapping[sku_in_offer]
         except KeyError:
             continue
-    available_offers = total_group_items // 3 # 3 for 45
-    remaining_items = total_group_items % 3
+    available_offers = int(total_group_items // 3) # 3 for 45
+    remaining_items = int(total_group_items % 3)
 
+    print(remaining_items)
+    print(PRICE_TABLE[GROUP_OFFER[-1]['price']])
     total_price = available_offers * 45
     total_price += remaining_items * PRICE_TABLE[GROUP_OFFER[-1]['price']] # cheapest item of the group offer list
     return total_price, items_mapping
@@ -123,6 +125,9 @@ def checkout(skus):
         except KeyError:
             pass
 
+    group_sku_total_price, items_mapping = get_group_offers(items_mapping)
+    total_price += group_sku_total_price
+
     for sku, quantity in items_mapping.items():
         total_price_of_sku = 0
         try:
@@ -140,3 +145,4 @@ def checkout(skus):
 
     return total_price
 
+print(checkout("A"))
