@@ -58,9 +58,10 @@ def calculate_offers(sku_data):
 
 def calculate_deductions(items_mapping, sku):
     sku_data = PRICE_TABLE[sku]
-
+    
     if sku_data['offer']:
         offers = calculate_offers(sku_data['offer'])
+        print(offers)
         if offers['deduction']:
             sku_deductions = items_mapping[sku] // offers['deduction']['num_of_items']
             total_sku_deductions = offers['deduction']['quantity'] * sku_deductions
@@ -71,11 +72,11 @@ def calculate_deductions(items_mapping, sku):
                     items_mapping[offers['deduction']['chosen_sku']] = 0
             except KeyError:
                 pass
-        
+
         total = items_mapping[sku] * PRICE_TABLE[sku]['price']
         del items_mapping[sku]
         return total, items_mapping
-            
+
 
 
 def get_total_price_from_offers(total_quantity, offers, normal_price):
@@ -96,15 +97,16 @@ def checkout(skus):
     if not is_sku_valid:
         return is_sku_valid
 
+    total_price = 0
     items_mapping = create_item_quantity_mapping(skus)
     for priority in PRIORITY:
         try:
             items_mapping[priority]
-            calculate_deductions(items_mapping, skus)
+            total_price, items_mapping = calculate_deductions(items_mapping, priority)
+            print(total_price, items_mapping)
         except:
             pass
 
-    total_price = 0
     for sku, quantity in items_mapping.items():
         try:
             sku_data = PRICE_TABLE[sku]
@@ -121,7 +123,7 @@ def checkout(skus):
 
     return total_price
 
-checkout("E")
+checkout("EEEE")
 
 
 
