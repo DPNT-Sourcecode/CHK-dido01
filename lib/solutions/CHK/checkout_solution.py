@@ -38,11 +38,17 @@ def calculate_offers(sku_data):
     available_offers = sku_data.split(',')
     for available_offer in available_offers:
         num_of_items, offer_price = available_offer.split('for')
-        
+        quantity, chosen_sku = offer_price.split('.')
+        if quantity and chosen_sku:
+            offers['deduction'] = {
+                "quantity": int(quantity),
+                "chosen_sku": chosen_sku
+            }
+            continue
+
         num_of_items = int(num_of_items)
         offer_price = int(offer_price)
         offers[num_of_items] = offer_price
-
 
     return offers
 
@@ -61,9 +67,6 @@ def checkout(skus):
             print(PRICE_TABLE[sku])
             if sku_data['offer']:
                 offers = calculate_offers(sku_data['offer'])
-        #         num_of_items, offer_price = sku_data['offer'].split('for')
-        #         num_of_items = int(num_of_items)
-        #         offer_price = int(offer_price)
         #         available_offers = quantity // num_of_items # find how many times the offer applies
         #         remaining_non_offer_skus = quantity % num_of_items # find how many items are left that have a normal price
         #         total_price_of_sku = available_offers * offer_price + remaining_non_offer_skus * sku_data['price']
@@ -77,6 +80,7 @@ def checkout(skus):
     return total_price
 
 checkout("AAA")
+
 
 
 
