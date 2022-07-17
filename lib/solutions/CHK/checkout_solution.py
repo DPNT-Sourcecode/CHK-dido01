@@ -86,11 +86,15 @@ def get_group_offers(items_mapping):
         try:
             total_sku_items = items_mapping[sku_in_offer]
             total_group_items += total_sku_items
-            del items_mapping[sku_in_offer] # clean mapping data struct
         except KeyError:
             continue
+
     available_offers = int(total_group_items // 3) # 3 for 45
     remaining_items = int(total_group_items % 3)
+    
+    if available_offers == 0:
+        # dont update anything 
+        return 0, items_mapping
 
     total_price = available_offers * 45
     total_price += remaining_items * PRICE_TABLE[GROUP_OFFER[-1]]['price'] # cheapest item of the group offer list
@@ -148,4 +152,5 @@ def checkout(skus):
         total_price += total_price_of_sku
 
     return total_price
+
 
