@@ -62,6 +62,16 @@ def calculate_deductions(items_mapping, sku):
         offers = calculate_offers(sku_data['offer'])
         if offers['deduction']:
             sku_deductions = items_mapping[sku] // offers['deduction']['num_of_items']
+            total_sku_deductions = offers['deduction']['quantity'] * sku_deductions
+            try:
+                if total_sku_deductions > items_mapping[offers['deduction']['chosen_sku']]:
+                    items_mapping[offers['deduction']['chosen_sku']] = items_mapping[offers['deduction']['chosen_sku']] - total_sku_deductions
+                else:
+                    items_mapping[offers['deduction']['chosen_sku']] = 0
+            except KeyError:
+                pass
+        
+        total = items_mapping[sku] * 
             
 
 
@@ -103,5 +113,6 @@ def checkout(skus):
     return total_price
 
 checkout("E")
+
 
 
