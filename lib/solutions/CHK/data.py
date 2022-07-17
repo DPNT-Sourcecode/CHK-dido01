@@ -74,11 +74,11 @@ PRICE_TABLE = {
     },
     "S" : {
         "price": 20,
-        "offer": "Group"
+        "offer": None
     },
     "T" : {
         "price": 20,
-        "offer": "Group"
+        "offer": None
     },
     "U" : {
         "price": 40,
@@ -94,15 +94,15 @@ PRICE_TABLE = {
     },
     "X" : {
         "price": 17,
-        "offer": "Group"
+        "offer": None
     },
     "Y" : {
         "price": 20,
-        "offer": "Group"
+        "offer": None
     },
     "Z" : {
         "price": 21,
-        "offer": "Group"
+        "offer": None
     },
 }
 
@@ -110,3 +110,4 @@ PRICE_TABLE = {
 PRIORITY = ['E', 'N', 'R']
 
 GROUP_OFFER = ['Z', 'Y', 'T', 'S', 'X'] # price desc order
+

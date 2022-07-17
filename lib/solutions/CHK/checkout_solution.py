@@ -1,4 +1,4 @@
-from .data import PRICE_TABLE, PRIORITY, GROUP_OFFER
+from data import PRICE_TABLE, PRIORITY, GROUP_OFFER
 
 # noinspection PyUnusedLocal
 # skus = unicode string
@@ -95,10 +95,15 @@ def get_group_offers(items_mapping):
     if available_offers == 0:
         # dont update anything 
         return 0, items_mapping
+    
+    for sku_in_offer in GROUP_OFFER:
+        # if there are available group offers
+        del items_mapping[sku_in_offer]
 
     total_price = available_offers * 45
     total_price += remaining_items * PRICE_TABLE[GROUP_OFFER[-1]]['price'] # cheapest item of the group offer list
     return total_price, items_mapping
+
 
 def get_total_price_from_offers(total_quantity, offers, normal_price):
     """Calculate total price from available"""
@@ -152,5 +157,6 @@ def checkout(skus):
         total_price += total_price_of_sku
 
     return total_price
+
 
 
