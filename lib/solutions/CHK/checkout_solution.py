@@ -30,10 +30,17 @@ def checkout(skus):
             sku_data = PRICE_TABLE[sku]
             if sku_data['offer']:
                 num_of_items, offer_price = sku_data['offer'].split('for')
+                available_offers = quantity // num_of_items
+                remaining_non_offer_skus = quantity % num_of_items
+                total_price_of_sku = available_offers * offer_price + remaining_non_offer_skus * sku_data['price']
+            else:
+                total_price_of_sku = quantity * 
+            
         except KeyError:
             # pass as we dont have clear instrucitons of what to do with unknown skus
             pass
     return 10
+
 
 
 
