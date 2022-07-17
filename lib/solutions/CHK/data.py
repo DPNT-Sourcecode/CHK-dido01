@@ -101,19 +101,39 @@ PRICE_TABLE = {
         "price": 50,
         "offer": "3 for 1.Q"
     },
-    "L" : {
+    "S" : {
+        "price": 30,
+        "offer": None
+    },
+    "T" : {
+        "price": 20,
+        "offer": None
+    },
+    "U" : {
+        "price": 40,
+        "offer": "4 for 120"
+    },
+    "V" : {
+        "price": 50,
+        "offer": "2 for 90, 3 for 130"
+    },
+    "W" : {
+        "price": 20,
+        "offer": None
+    },
+    "X" : {
         "price": 90,
         "offer": None
     },
-    "M" : {
-        "price": 15,
+    "Y" : {
+        "price": 10,
         "offer": None
     },
-    
-    # | R    | 50    | 3R get one Q free      |
-# | S    | 30    |                        |
-# | T    | 20    |                        |
-
+    "Z" : {
+        "price": 50,
+        "offer": None
+    },
 }
+
 
 PRIORITY = ['E', 'N', 'R']
