@@ -31,10 +31,14 @@ def create_item_quantity_mapping(skus):
     return items_mapping
 
 
-def calculate_offers(sku_data):
+def calculate_offers(sku, sku_data):
+    offers = {}
     available_offers = sku_data['offer'].split(',')
     for available_offer in available_offers:
-        num_of_items, offer_price = sku_data['offer'].split('for')
+        num_of_items, offer_price = available_offer.split('for')
+    offers[num_of_items] = offer_price
+    print(offers)
+    return offers
 
 
 def checkout(skus):
@@ -48,6 +52,7 @@ def checkout(skus):
         try:
             sku_data = PRICE_TABLE[sku]
             if sku_data['offer']:
+                calculate_offers()
                 num_of_items, offer_price = sku_data['offer'].split('for')
                 num_of_items = int(num_of_items)
                 offer_price = int(offer_price)
@@ -62,5 +67,6 @@ def checkout(skus):
         total_price += total_price_of_sku
 
     return total_price
+
 
 
