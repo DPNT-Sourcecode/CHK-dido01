@@ -1,4 +1,4 @@
-from .data import PRICE_TABLE, PRIORITY, GROUP_OFFER
+from data import PRICE_TABLE, PRIORITY, GROUP_OFFER
 
 # noinspection PyUnusedLocal
 # skus = unicode string
@@ -96,7 +96,7 @@ def get_group_offers(items_mapping):
         # dont update anything
         return 0, items_mapping
 
-    cheapest = 21
+    cheapest = 21 
     for sku_in_offer in GROUP_OFFER:
         # if there are available group offers
         try:
@@ -165,6 +165,8 @@ def checkout(skus):
         total_price += total_price_of_sku
 
     return total_price
+
+print(checkout('CXYZYZC'))
 
 
 
