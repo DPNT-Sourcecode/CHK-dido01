@@ -47,7 +47,3 @@ def checkout(skus):
 
 
 checkout("AAAABCCCCCC")
-
-
-
-
