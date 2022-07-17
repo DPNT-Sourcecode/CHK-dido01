@@ -1,4 +1,4 @@
-from .data import PRICE_TABLE
+from data import PRICE_TABLE
 
 # noinspection PyUnusedLocal
 # skus = unicode string
@@ -31,9 +31,10 @@ def create_item_quantity_mapping(skus):
     return items_mapping
 
 
-def calculate_offers(sku, sku_data):
+def calculate_offers(sku_data):
     offers = {}
-    available_offers = sku_data['offer'].split(',')
+    print(sku_data)
+    available_offers = sku_data.split(',')
     for available_offer in available_offers:
         num_of_items, offer_price = available_offer.split('for')
     offers[num_of_items] = offer_price
@@ -47,26 +48,29 @@ def checkout(skus):
         return is_sku_valid
 
     items_mapping = create_item_quantity_mapping(skus)
+    print(items_mapping)
     total_price = 0
     for sku, quantity in items_mapping.items():
         try:
             sku_data = PRICE_TABLE[sku]
+            print(PRICE_TABLE[sku])
             if sku_data['offer']:
-                calculate_offers()
-                num_of_items, offer_price = sku_data['offer'].split('for')
-                num_of_items = int(num_of_items)
-                offer_price = int(offer_price)
-                available_offers = quantity // num_of_items # find how many times the offer applies
-                remaining_non_offer_skus = quantity % num_of_items # find how many items are left that have a normal price
-                total_price_of_sku = available_offers * offer_price + remaining_non_offer_skus * sku_data['price']
-            else:
-                total_price_of_sku = quantity * sku_data['price']
+                calculate_offers(sku_data['offer'])
+        #         num_of_items, offer_price = sku_data['offer'].split('for')
+        #         num_of_items = int(num_of_items)
+        #         offer_price = int(offer_price)
+        #         available_offers = quantity // num_of_items # find how many times the offer applies
+        #         remaining_non_offer_skus = quantity % num_of_items # find how many items are left that have a normal price
+        #         total_price_of_sku = available_offers * offer_price + remaining_non_offer_skus * sku_data['price']
+        #     else:
+        #         total_price_of_sku = quantity * sku_data['price']
         except KeyError:
             # pass as we dont have clear instrucitons of what to do with unknown skus
             pass
-        total_price += total_price_of_sku
+        # total_price += total_price_of_sku
 
     return total_price
 
+calculate_offers("AAA")
 
 
