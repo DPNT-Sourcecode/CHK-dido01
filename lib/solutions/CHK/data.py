@@ -29,3 +29,5 @@ PRICE_TABLE = {
         "offer": "2 for 1.B"
     },
 }
+
+PRIORITY = ['E']
