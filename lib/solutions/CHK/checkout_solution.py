@@ -15,8 +15,9 @@ def check_validity_of_skus(skus):
     if not skus.isalpha():
         # check if it contains any special chars or numbers
         return -1
-    
+
     return True
+
 
 def create_item_quantity_mapping(skus):
     """Returns a dictionary mapping the skus with the corresponding quantity"""
@@ -29,9 +30,17 @@ def create_item_quantity_mapping(skus):
             items_mapping[char] = 1
     return items_mapping
 
+
+def calculate_offers(sku_data):
+    available_offers = sku_data['offer'].split(',')
+    for available_offer in available_offers:
+        num_of_items, offer_price = sku_data['offer'].split('for')
+
+
 def checkout(skus):
-    
-    
+    is_sku_valid = check_validity_of_skus(skus)
+    if not is_sku_valid:
+        return is_sku_valid
 
     items_mapping = create_item_quantity_mapping(skus)
     total_price = 0
@@ -53,4 +62,5 @@ def checkout(skus):
         total_price += total_price_of_sku
 
     return total_price
+
 
