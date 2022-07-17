@@ -55,6 +55,9 @@ def calculate_offers(sku_data):
 
     return offers
 
+def calculate_deductions(items_mapping):
+
+
 def get_total_price_from_offers(total_quantity, offers, normal_price):
     """Calculate total price from available"""
     total_price_of_sku = 0
@@ -79,17 +82,17 @@ def checkout(skus):
     for sku, quantity in items_mapping.items():
         try:
             sku_data = PRICE_TABLE[sku]
-            print(PRICE_TABLE[sku])
+
             if sku_data['offer']:
                 offers = calculate_offers(sku_data['offer'])
                 total_price_of_sku = get_total_price_from_offers(quantity, offers, sku_data['price'])
             else:
                 total_price_of_sku = quantity * sku_data['price']
         except KeyError:
-            # pass as we dont have clear instrucitons of what to do with unknown skus
             pass
+
         total_price += total_price_of_sku
-    print(total_price)
+
     return total_price
 
-checkout("AAAAAA")
+checkout("E")
