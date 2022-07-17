@@ -80,21 +80,20 @@ def calculate_deductions(items_mapping, sku):
         return total, items_mapping
 
 def get_group_offers(items_mapping):
+    """Calculate group offers"""
     total_group_items = 0
     for sku_in_offer in GROUP_OFFER:
         try:
             total_sku_items = items_mapping[sku_in_offer]
             total_group_items += total_sku_items
-            del items_mapping[sku_in_offer]
+            del items_mapping[sku_in_offer] # clean mapping data struct
         except KeyError:
             continue
     available_offers = int(total_group_items // 3) # 3 for 45
     remaining_items = int(total_group_items % 3)
 
-    print(remaining_items)
-    print(PRICE_TABLE[GROUP_OFFER[-1]['price']])
     total_price = available_offers * 45
-    total_price += remaining_items * PRICE_TABLE[GROUP_OFFER[-1]['price']] # cheapest item of the group offer list
+    total_price += remaining_items * PRICE_TABLE[GROUP_OFFER[-1]]['price'] # cheapest item of the group offer list
     return total_price, items_mapping
 
 def get_total_price_from_offers(total_quantity, offers, normal_price):
@@ -111,12 +110,15 @@ def get_total_price_from_offers(total_quantity, offers, normal_price):
     return total_price_of_sku
 
 def checkout(skus):
+    """Calculate checkout price including all offers"""
     is_sku_valid = check_validity_of_skus(skus)
     if not is_sku_valid or is_sku_valid == -1:
         return is_sku_valid
 
     total_price = 0
     items_mapping = create_item_quantity_mapping(skus)
+
+    # calculate priority deductions
     for priority in PRIORITY:
         try:
             items_mapping[priority]
@@ -125,9 +127,11 @@ def checkout(skus):
         except KeyError:
             pass
 
+    # calculate group offers
     group_sku_total_price, items_mapping = get_group_offers(items_mapping)
     total_price += group_sku_total_price
 
+    # calculate remaining offers
     for sku, quantity in items_mapping.items():
         total_price_of_sku = 0
         try:
@@ -145,4 +149,5 @@ def checkout(skus):
 
     return total_price
 
-print(checkout("A"))
+print(checkout("STXXX"))
+
