@@ -28,6 +28,7 @@ def create_item_quantity_mapping(skus):
         except KeyError:
             # if item not already in the mapping dictionary initialize it to 1
             items_mapping[char] = 1
+
     return items_mapping
 
 
@@ -37,6 +38,8 @@ def calculate_offers(sku_data):
     available_offers = sku_data.split(',')
     for available_offer in available_offers:
         num_of_items, offer_price = available_offer.split('for')
+        num_of_items = int(num_of_items)
+        offer_price = int(offer_price)
     offers[num_of_items] = offer_price
     print(offers)
     return offers
@@ -49,13 +52,15 @@ def checkout(skus):
 
     items_mapping = create_item_quantity_mapping(skus)
     print(items_mapping)
+
     total_price = 0
     for sku, quantity in items_mapping.items():
         try:
             sku_data = PRICE_TABLE[sku]
             print(PRICE_TABLE[sku])
             if sku_data['offer']:
-                calculate_offers(sku_data['offer'])
+                offers = calculate_offers(sku_data['offer'])
+                print(offers)
         #         num_of_items, offer_price = sku_data['offer'].split('for')
         #         num_of_items = int(num_of_items)
         #         offer_price = int(offer_price)
@@ -71,6 +76,6 @@ def checkout(skus):
 
     return total_price
 
-calculate_offers("AAA")
+checkout("AAA")
 
 
