@@ -70,8 +70,8 @@ PRICE_TABLE = {
         "offer": None
     },
     "K" : {
-        "price": 80,
-        "offer": "2 for 150"
+        "price": 70,
+        "offer": "2 for 120"
     },
     "L" : {
         "price": 90,
@@ -137,3 +137,4 @@ PRICE_TABLE = {
 
 
 PRIORITY = ['E', 'N', 'R']
+
