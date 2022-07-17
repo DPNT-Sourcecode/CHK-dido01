@@ -34,17 +34,20 @@ def create_item_quantity_mapping(skus):
 
 def calculate_offers(sku_data):
     offers = {}
-    print(sku_data)
     available_offers = sku_data.split(',')
     for available_offer in available_offers:
         num_of_items, offer_price = available_offer.split('for')
-        quantity, chosen_sku = offer_price.split('.')
-        if quantity and chosen_sku:
-            offers['deduction'] = {
-                "quantity": int(quantity),
-                "chosen_sku": chosen_sku
-            }
-            continue
+
+        try:
+            quantity, chosen_sku = offer_price.split('.')
+            if quantity and chosen_sku:
+                offers['deduction'] = {
+                    "quantity": int(quantity),
+                    "chosen_sku": chosen_sku
+                }
+                continue
+        except ValueError:
+            pass
 
         num_of_items = int(num_of_items)
         offer_price = int(offer_price)
@@ -52,6 +55,9 @@ def calculate_offers(sku_data):
 
     return offers
 
+def get_total_price_from_offers(offers, price):
+for offer in sorted(offers.items(), reverse=True):
+                    print(offer)
 
 def checkout(skus):
     is_sku_valid = check_validity_of_skus(skus)
@@ -67,9 +73,11 @@ def checkout(skus):
             print(PRICE_TABLE[sku])
             if sku_data['offer']:
                 offers = calculate_offers(sku_data['offer'])
-        #         available_offers = quantity // num_of_items # find how many times the offer applies
-        #         remaining_non_offer_skus = quantity % num_of_items # find how many items are left that have a normal price
-        #         total_price_of_sku = available_offers * offer_price + remaining_non_offer_skus * sku_data['price']
+                for offer in sorted(offers.items(), reverse=True):
+                    print(offer)
+                # available_offers = quantity // num_of_items # find how many times the offer applies
+                # remaining_non_offer_skus = quantity % num_of_items # find how many items are left that have a normal price
+                # total_price_of_sku = available_offers * offer_price + remaining_non_offer_skus * sku_data['price']
         #     else:
         #         total_price_of_sku = quantity * sku_data['price']
         except KeyError:
@@ -80,7 +88,3 @@ def checkout(skus):
     return total_price
 
 checkout("AAA")
-
-
-
-
