@@ -55,7 +55,12 @@ def calculate_offers(sku_data):
 
     return offers
 
-def calculate_deductions(items_mapping):
+def calculate_deductions(items_mapping, sku):
+    sku_data = PRICE_TABLE[sku]
+    if sku_data['offer']:
+        offers = calculate_offers(sku_data['offer'])
+        if offers['deduction']:
+            
 
 
 def get_total_price_from_offers(total_quantity, offers, normal_price):
@@ -96,3 +101,4 @@ def checkout(skus):
     return total_price
 
 checkout("E")
+
