@@ -61,12 +61,11 @@ def get_total_price_from_offers(total_quantity, offers, normal_price):
     remaining_quantity = total_quantity
     for num_of_items, offer_price in sorted(offers.items(), reverse=True):
         available_offers = remaining_quantity // num_of_items # find how many times the offer applies
-        remaining_quantity = total_quantity % num_of_items # find how many items are left that have a normal price
-        total_price_of_sku = available_offers * offer_price
-    
+        remaining_quantity = remaining_quantity % num_of_items # find how many items are left that have a normal price
+        total_price_of_sku += available_offers * offer_price
     if remaining_quantity > 0:
         total_price_of_sku += remaining_quantity * normal_price
-    
+
     return total_price_of_sku
 
 def checkout(skus):
@@ -84,9 +83,6 @@ def checkout(skus):
             if sku_data['offer']:
                 offers = calculate_offers(sku_data['offer'])
                 total_price_of_sku = get_total_price_from_offers(quantity, offers, sku_data['price'])
-                # available_offers = quantity // num_of_items # find how many times the offer applies
-                # remaining_non_offer_skus = quantity % num_of_items # find how many items are left that have a normal price
-                # total_price_of_sku = available_offers * offer_price + remaining_non_offer_skus * sku_data['price']
             else:
                 total_price_of_sku = quantity * sku_data['price']
         except KeyError:
@@ -96,4 +92,4 @@ def checkout(skus):
     print(total_price)
     return total_price
 
-checkout("AAAAA")
+checkout("AAAAAA")
