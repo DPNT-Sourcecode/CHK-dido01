@@ -84,9 +84,16 @@ def get_group_offers(items_mapping):
     for sku_in_offer in GROUP_OFFER:
         try:
             total_sku_items = items_mapping[sku_in_offer]
-            
+            total_group_items += total_sku_items
+            del items_mapping[sku_in_offer]
         except KeyError:
             continue
+    available_offers = total_group_items // 3 # 3 for 45
+    remaining_items = total_group_items % 3
+
+    total_price = available_offers * 45
+    total_price += remaining_items * PRICE_TABLE[GROUP_OFFER[-1]['price']] # cheapest item of the group offer list
+    return total_price, items_mapping
 
 def get_total_price_from_offers(total_quantity, offers, normal_price):
     """Calculate total price from available"""
@@ -132,5 +139,4 @@ def checkout(skus):
         total_price += total_price_of_sku
 
     return total_price
-
 
