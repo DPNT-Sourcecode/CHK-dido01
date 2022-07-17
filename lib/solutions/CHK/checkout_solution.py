@@ -101,13 +101,15 @@ def get_group_offers(items_mapping):
         # if there are available group offers
         try:
             items_mapping[sku_in_offer]
+            if cheapest > PRICE_TABLE[sku_in_offer]['price']:
+                cheapest = PRICE_TABLE[sku_in_offer]['price']
+            del items_mapping[sku_in_offer]
         except KeyError:
             continue
-        cheapest = 
-        del items_mapping[sku_in_offer]
+
 
     total_price = available_offers * 45
-    total_price += remaining_items * PRICE_TABLE[GROUP_OFFER[-1]]['price'] # cheapest item of the group offer list
+    total_price += remaining_items * cheapest # cheapest item of the group offer list
     return total_price, items_mapping
 
 
@@ -164,7 +166,7 @@ def checkout(skus):
 
     return total_price
 
-print(checkout("STS"))
+print(checkout("STSZ"))
 
 
 
