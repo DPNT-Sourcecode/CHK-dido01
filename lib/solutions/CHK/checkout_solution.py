@@ -1,4 +1,4 @@
-from data import PRICE_TABLE
+from data import PRICE_TABLE, PRIORITY
 
 # noinspection PyUnusedLocal
 # skus = unicode string
@@ -58,6 +58,7 @@ def calculate_offers(sku_data):
 
 def calculate_deductions(items_mapping, sku):
     sku_data = PRICE_TABLE[sku]
+
     if sku_data['offer']:
         offers = calculate_offers(sku_data['offer'])
         if offers['deduction']:
@@ -71,7 +72,9 @@ def calculate_deductions(items_mapping, sku):
             except KeyError:
                 pass
         
-        total = items_mapping[sku] * 
+        total = items_mapping[sku] * PRICE_TABLE[sku]['price']
+        del items_mapping[sku]
+        return total, items_mapping
             
 
 
@@ -94,6 +97,12 @@ def checkout(skus):
         return is_sku_valid
 
     items_mapping = create_item_quantity_mapping(skus)
+    for priority in PRIORITY:
+        try:
+            items_mapping[priority]
+            calculate_deductions(items_mapping, skus)
+        except:
+            pass
 
     total_price = 0
     for sku, quantity in items_mapping.items():
@@ -113,6 +122,7 @@ def checkout(skus):
     return total_price
 
 checkout("E")
+
 
 
 
