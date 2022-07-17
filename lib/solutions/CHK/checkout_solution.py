@@ -98,6 +98,7 @@ def get_group_offers(items_mapping):
 
     total_price = available_offers * 45
     counter = 0
+    remaining_price=0
     for sku in reversed(GROUP_OFFER):
         try:
             total_sku_items = items_mapping[sku]
@@ -175,6 +176,7 @@ def checkout(skus):
     return total_price
 
 print(checkout("VVVVV"))
+
 
 
 
