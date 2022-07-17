@@ -1,4 +1,4 @@
-from .data import PRICE_TABLE, PRIORITY
+from data import PRICE_TABLE, PRIORITY
 
 # noinspection PyUnusedLocal
 # skus = unicode string
@@ -103,11 +103,11 @@ def checkout(skus):
         try:
             items_mapping[priority]
             total_price, items_mapping = calculate_deductions(items_mapping, priority)
-            print(total_price, items_mapping)
         except KeyError:
             pass
 
     for sku, quantity in items_mapping.items():
+        total_price_of_sku = 0
         try:
             sku_data = PRICE_TABLE[sku]
 
@@ -123,3 +123,5 @@ def checkout(skus):
 
     return total_price
 
+
+print(checkout('a'))
