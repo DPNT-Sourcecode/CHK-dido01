@@ -15,4 +15,5 @@ def checkout(skus):
         # check if it contains any special chars or numbers
         return -1
 
-    return skus
+    return 10
+
