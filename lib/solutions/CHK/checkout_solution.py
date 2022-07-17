@@ -91,13 +91,19 @@ def get_group_offers(items_mapping):
 
     available_offers = int(total_group_items // 3) # 3 for 45
     remaining_items = int(total_group_items % 3)
-    
+
     if available_offers == 0:
-        # dont update anything 
+        # dont update anything
         return 0, items_mapping
-    
+
+    cheapest = 21
     for sku_in_offer in GROUP_OFFER:
         # if there are available group offers
+        try:
+            items_mapping[sku_in_offer]
+        except KeyError:
+            continue
+        cheapest = 
         del items_mapping[sku_in_offer]
 
     total_price = available_offers * 45
@@ -157,6 +163,8 @@ def checkout(skus):
         total_price += total_price_of_sku
 
     return total_price
+
+print(checkout("STS"))
 
 
 
