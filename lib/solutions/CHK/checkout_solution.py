@@ -102,7 +102,8 @@ def checkout(skus):
     for priority in PRIORITY:
         try:
             items_mapping[priority]
-            total_price, items_mapping = calculate_deductions(items_mapping, priority)
+            deduction_sku_total_price, items_mapping = calculate_deductions(items_mapping, priority)
+            total_price += deduction_sku_total_price
         except KeyError:
             pass
 
