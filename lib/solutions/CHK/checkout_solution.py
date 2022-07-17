@@ -58,14 +58,16 @@ def calculate_offers(sku_data):
 
 def calculate_deductions(items_mapping, sku):
     sku_data = PRICE_TABLE[sku]
+    print(items_mapping)
 
     if sku_data['offer']:
         offers = calculate_offers(sku_data['offer'])
-        print(offers)
+
         if offers['deduction']:
             sku_deductions = items_mapping[sku] // int(offers['deduction']['num_of_items'])
             total_sku_deductions = offers['deduction']['quantity'] * sku_deductions
-            print(total_sku_deductions> items_mapping[offers['deduction']['chosen_sku']])
+            
+            print(items_mapping[offers['deduction']['chosen_sku']])
             try:
                 if total_sku_deductions > items_mapping[offers['deduction']['chosen_sku']]:
                     items_mapping[offers['deduction']['chosen_sku']] = items_mapping[offers['deduction']['chosen_sku']] - total_sku_deductions
@@ -73,6 +75,7 @@ def calculate_deductions(items_mapping, sku):
                     items_mapping[offers['deduction']['chosen_sku']] = 0
             except KeyError:
                 pass
+            print(items_mapping)
 
         total = items_mapping[sku] * PRICE_TABLE[sku]['price']
         del items_mapping[sku]
