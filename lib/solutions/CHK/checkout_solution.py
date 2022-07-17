@@ -24,11 +24,16 @@ def checkout(skus):
         except KeyError:
             # if item not already in the mapping dictionary initialize it to 1
             items_mapping[char] = 1
-    
-    print(items_mapping)
 
+    for sku, quantity in items_mapping.items():
+        try:
+            sku_data = PRICE_TABLE[sku]
+            if sku_data['offer']:
+                num_of_items, offer_price = sku_data['offer'].split('for')
+        except KeyError:
+            # pass as we dont have clear instrucitons of what to do with unknown skus
+            pass
     return 10
 
 
-checkout("AAA")
 
