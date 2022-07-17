@@ -42,6 +42,7 @@ def calculate_offers(sku_data):
             quantity, chosen_sku = offer_price.split('.')
             if quantity and chosen_sku:
                 offers['deduction'] = {
+                    "num_of_items": num_of_items,
                     "quantity": int(quantity),
                     "chosen_sku": chosen_sku
                 }
@@ -60,6 +61,7 @@ def calculate_deductions(items_mapping, sku):
     if sku_data['offer']:
         offers = calculate_offers(sku_data['offer'])
         if offers['deduction']:
+            sku_deductions = items_mapping[sku] // offers['deduction']['num_of_items']
             
 
 
@@ -101,4 +103,5 @@ def checkout(skus):
     return total_price
 
 checkout("E")
+
 
