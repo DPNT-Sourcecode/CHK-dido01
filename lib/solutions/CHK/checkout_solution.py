@@ -1,4 +1,4 @@
-from data import PRICE_TABLE, PRIORITY, GROUP_OFFER
+from .data import PRICE_TABLE, PRIORITY, GROUP_OFFER
 
 # noinspection PyUnusedLocal
 # skus = unicode string
@@ -165,8 +165,6 @@ def checkout(skus):
         total_price += total_price_of_sku
 
     return total_price
-
-print(checkout("STSZ"))
 
 
 
