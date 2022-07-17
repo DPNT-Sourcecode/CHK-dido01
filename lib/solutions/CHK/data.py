@@ -102,12 +102,12 @@ PRICE_TABLE = {
         "offer": "3 for 1.Q"
     },
     "S" : {
-        "price": 30,
-        "offer": None
+        "price": 20,
+        "offer": "Group"
     },
     "T" : {
         "price": 20,
-        "offer": None
+        "offer": "Group"
     },
     "U" : {
         "price": 40,
@@ -122,19 +122,21 @@ PRICE_TABLE = {
         "offer": None
     },
     "X" : {
-        "price": 90,
-        "offer": None
+        "price": 17,
+        "offer": "Group"
     },
     "Y" : {
-        "price": 10,
-        "offer": None
+        "price": 20,
+        "offer": "Group"
     },
     "Z" : {
-        "price": 50,
-        "offer": None
+        "price": 21,
+        "offer": "Group"
     },
 }
 
 
 PRIORITY = ['E', 'N', 'R']
+
+GROUP_OFFER = ['S', 'T', 'X', 'Y', 'Z']
 
