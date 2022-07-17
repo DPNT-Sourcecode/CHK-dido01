@@ -1,4 +1,4 @@
-from data import PRICE_TABLE
+from .data import PRICE_TABLE
 
 # noinspection PyUnusedLocal
 # skus = unicode string
@@ -16,7 +16,7 @@ def checkout(skus):
     if not skus.isalpha():
         # check if it contains any special chars or numbers
         return -1
-    
+
     items_mapping = {}
     for char in skus:
         try:
@@ -33,7 +33,6 @@ def checkout(skus):
                 num_of_items, offer_price = sku_data['offer'].split('for')
                 num_of_items = int(num_of_items)
                 offer_price = int(offer_price)
-                print(num_of_items, offer_price)
                 available_offers = quantity // num_of_items # find how many times the offer applies
                 remaining_non_offer_skus = quantity % num_of_items # find how many items are left that have a normal price
                 total_price_of_sku = available_offers * offer_price + remaining_non_offer_skus * sku_data['price']
@@ -44,11 +43,11 @@ def checkout(skus):
             pass
         total_price += total_price_of_sku
 
-    print(total_price_of_sku)
-    return total_price_of_sku
+    return total_price
 
 
-checkout("AAAAB")
+checkout("AAAABCCCCCC")
+
 
 
 
