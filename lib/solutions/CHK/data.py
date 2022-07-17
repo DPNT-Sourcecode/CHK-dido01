@@ -10,7 +10,7 @@
 PRICE_TABLE = {
     "A" : {
         "price": 50,
-        "offer": "3 for 130"
+        "offer": "3 for 130, 5 for 200"
     },
     "B" : {
         "price": 30,
@@ -23,5 +23,9 @@ PRICE_TABLE = {
     "D" : {
         "price": 15,
         "offer": None
+    },
+    "E" : {
+        "price": 40,
+        "offer": "2 for 1B"
     },
 }

@@ -45,5 +45,3 @@ def checkout(skus):
 
     return total_price
 
-
-checkout("AAAABCCCCCC")
