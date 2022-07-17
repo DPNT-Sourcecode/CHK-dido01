@@ -7,8 +7,27 @@
 # | D    | 15    |                        |
 # | E    | 40    | 2E get one B free      |
 # | F    | 10    | 2F get one F free      |
+# | G    | 20    |                        |
+# | H    | 10    | 5H for 45, 10H for 80  |
+# | I    | 35    |                        |
+# | J    | 60    |                        |
+# | K    | 80    | 2K for 150             |
+# | L    | 90    |                        |
+# | M    | 15    |                        |
+# | N    | 40    | 3N get one M free      |
+# | O    | 10    |                        |
+# | P    | 50    | 5P for 200             |
+# | Q    | 30    | 3Q for 80              |
+# | R    | 50    | 3R get one Q free      |
+# | S    | 30    |                        |
+# | T    | 20    |                        |
+# | U    | 40    | 3U get one U free      |
+# | V    | 50    | 2V for 90, 3V for 130  |
+# | W    | 20    |                        |
+# | X    | 90    |                        |
+# | Y    | 10    |                        |
+# | Z    | 50    |                        |
 # +------+-------+------------------------+
-
 PRICE_TABLE = {
     "A" : {
         "price": 50,
@@ -34,6 +53,36 @@ PRICE_TABLE = {
         "price": 10,
         "offer": "3 for 20"
     },
+    "G" : {
+        "price": 20,
+        "offer": None
+    },
+    "H" : {
+        "price": 10,
+        "offer": "5 for 45, 10 for 80"
+    },
+    "I" : {
+        "price": 35,
+        "offer": None
+    },
+    "J" : {
+        "price": 60,
+        "offer": None
+    },
+    "K" : {
+        "price": 80,
+        "offer": "2 for 150"
+    },
+    "L" : {
+        "price": 90,
+        "offer": None
+    },
+    "M" : {
+        "price": 15,
+        "offer": None
+    },
+    
+
 }
 
 PRIORITY = ['E']
