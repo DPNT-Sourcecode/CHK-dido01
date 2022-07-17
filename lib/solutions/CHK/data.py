@@ -138,5 +138,5 @@ PRICE_TABLE = {
 
 PRIORITY = ['E', 'N', 'R']
 
-GROUP_OFFER = ['S', 'T', 'X', 'Y', 'Z']
+GROUP_OFFER = ['Z', 'Y', 'T', 'S', 'X'] # price desc order
 

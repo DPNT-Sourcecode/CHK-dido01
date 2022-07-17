@@ -1,4 +1,4 @@
-from .data import PRICE_TABLE, PRIORITY
+from .data import PRICE_TABLE, PRIORITY, GROUP_OFFER
 
 # noinspection PyUnusedLocal
 # skus = unicode string
@@ -78,6 +78,15 @@ def calculate_deductions(items_mapping, sku):
         total = items_mapping[sku] * PRICE_TABLE[sku]['price']
         del items_mapping[sku]
         return total, items_mapping
+
+def get_group_offers(items_mapping):
+    total_group_items = 0
+    for sku_in_offer in GROUP_OFFER:
+        try:
+            total_sku_items = items_mapping[sku_in_offer]
+            
+        except KeyError:
+            continue
 
 def get_total_price_from_offers(total_quantity, offers, normal_price):
     """Calculate total price from available"""
